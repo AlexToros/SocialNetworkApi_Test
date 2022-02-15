@@ -15,8 +15,12 @@ namespace SocialNetworkApi_Test
 				Id = client.ClientID;
 				Name = client.Name;
 
-				Subscribers = client.Subscribers?.Select(x => new Client { Id = x.SubscriberClient.ClientID, Name = x.SubscriberClient.Name }).ToList();
-				Subscriptions = client.Subscriptions?.Select(x => new Client { Id = x.TargetClient.ClientID, Name = x.TargetClient.Name }).ToList();
+				Subscribers = client.Subscribers?
+					.Where(x => x.SubscriberClient != null)
+					.Select(x => new Client { Id = x.SubscriberClient.ClientID, Name = x.SubscriberClient.Name }).ToList();
+				Subscriptions = client.Subscriptions?
+					.Where(x => x.TargetClient != null)
+					.Select(x => new Client { Id = x.TargetClient.ClientID, Name = x.TargetClient.Name }).ToList();
 			}
 
 			public int Id { get; set; }

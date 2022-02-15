@@ -17,8 +17,8 @@ namespace SocialNetworkApi_Test
 		{
 			_storeSettings = storeSettings;
 
-			//Database.EnsureDeleted();
-			//Database.EnsureCreated();
+			Database.EnsureDeleted();
+			Database.EnsureCreated();
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
