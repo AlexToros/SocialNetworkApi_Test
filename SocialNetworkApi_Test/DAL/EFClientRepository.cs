@@ -24,7 +24,10 @@ namespace SocialNetworkApi_Test
 
 		public ClientDao Get(int clientId)
 		{
-			return _dbContext.Clients.SingleOrDefault(x => x.ClientID == clientId);
+			return _dbContext.Clients
+				.Include(x => x.Subscribers).ThenInclude<ClientDao, SubscribeDao, ClientDao>(x => x.SubscriberClient)
+				.Include(x => x.Subscriptions).ThenInclude<ClientDao, SubscribeDao, ClientDao>(x => x.TargetClient)
+				.SingleOrDefault(x => x.ClientID == clientId);
 		}
 
 		public List<ClientDao> GetTopNPopularClients(int n)

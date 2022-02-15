@@ -14,7 +14,7 @@ namespace SocialNetworkApi_Test
 		public int ClientID { get; set; }
 		public string Name { get; set; }
 
-		public List<ClientDao> Subscriptions { get; set; }
-		public List<ClientDao> Subscribers { get; set; }
+		public ICollection<SubscribeDao> Subscriptions { get; set; }
+		public ICollection<SubscribeDao> Subscribers { get; set; }
 	}
 }

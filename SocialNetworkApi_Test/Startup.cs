@@ -27,8 +27,10 @@ namespace SocialNetworkApi_Test
 		{
 			var storeSettings = new StoreSettings().Bind(Configuration.GetSection("Store"));
 			var clientContext = new ClientContext(storeSettings);
+			var clientRepository = new EFClientRepository(clientContext);
+			var clientEngine = new ClientEngine(clientRepository, new ClientValidator());
 
-
+			services.AddSingleton(clientEngine);
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
 			{

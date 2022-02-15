@@ -17,8 +17,24 @@ namespace SocialNetworkApi_Test
 		{
 			_storeSettings = storeSettings;
 
-			Database.EnsureDeleted();
-			Database.EnsureCreated();
+			//Database.EnsureDeleted();
+			//Database.EnsureCreated();
+		}
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<SubscribeDao>()
+				.HasKey(x => new { x.SubscriberClientId, x.TargetClientId });
+
+			modelBuilder.Entity<SubscribeDao>()
+				.HasOne(x => x.SubscriberClient)
+				.WithMany(x => x.Subscriptions)
+				.HasForeignKey(x => x.SubscriberClientId);
+
+			modelBuilder.Entity<SubscribeDao>()
+				.HasOne(x => x.TargetClient)
+				.WithMany(x => x.Subscribers)
+				.HasForeignKey(x => x.TargetClientId);
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
