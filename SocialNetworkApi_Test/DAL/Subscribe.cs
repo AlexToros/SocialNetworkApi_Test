@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SocialNetworkApi_Test.Core.DAL
+namespace SocialNetworkApi_Test
 {
 	public class Subscribe
 	{
