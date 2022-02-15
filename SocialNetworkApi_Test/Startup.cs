@@ -25,6 +25,10 @@ namespace SocialNetworkApi_Test
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			var storeSettings = new StoreSettings().Bind(Configuration.GetSection("Store"));
+			var clientContext = new ClientContext(storeSettings);
+
+
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
 			{

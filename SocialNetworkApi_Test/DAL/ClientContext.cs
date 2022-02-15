@@ -1,0 +1,29 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace SocialNetworkApi_Test
+{
+	public class ClientContext : DbContext
+	{
+		private readonly StoreSettings _storeSettings;
+
+		public DbSet<ClientDao> Clients { get; set; }
+		public DbSet<SubscribeDao> Subscribes { get; set; }
+
+		public ClientContext(StoreSettings storeSettings)
+		{
+			_storeSettings = storeSettings;
+
+			Database.EnsureDeleted();
+			Database.EnsureCreated();
+		}
+
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			optionsBuilder.UseSqlite($"Data Source={_storeSettings.DbPath}");
+		}
+	}
+}
