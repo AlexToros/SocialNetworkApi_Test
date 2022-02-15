@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace SocialNetworkApi_Test
 {
-	interface IClientRepository
+	public interface IClientRepository
 	{
-		int Create(Client newClient);
-		void SaveSubscribe(Subscribe subscribe);
-		List<Client> GetTopNPopularClients(int n);
+		int Create(ClientDao newClient);
+		ClientDao Get(int clientId);
+		void SaveSubscribe(SubscribeDao subscribe);
+		List<ClientDao> GetTopNPopularClients(int n);
 	}
 }

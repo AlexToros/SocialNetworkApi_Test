@@ -9,6 +9,15 @@ namespace SocialNetworkApi_Test
 	{
 		public class Client
 		{
+			public Client(ClientDao client)
+			{
+				Id = client.ClientID;
+				Name = client.Name;
+
+				Subscribers = client.Subscribers.Select(x => new Client(x)).ToList();
+				Subscriptions = client.Subscriptions.Select(x => new Client(x)).ToList();
+			}
+
 			public int Id { get; set; }
 			public string Name { get; set; }
 

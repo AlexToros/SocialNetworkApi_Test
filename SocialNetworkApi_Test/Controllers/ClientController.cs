@@ -16,24 +16,32 @@ namespace SocialNetworkApi_Test.Controllers
 			_clientEngine = clientEngine;
 		}
 
-		[HttpPost]
-		public void Create(SocialApi.Client.Create request)
+		[HttpGet]
+		[Route("{clientId}")]
+		public SocialApi.Client GetClient(int clientId)
 		{
-			_clientEngine.CreateNewClient(request);
+			return _clientEngine.GetClient(clientId);
+		}
+
+		[HttpPost]
+		public SocialApi.Client Create(SocialApi.Client.Create request)
+		{
+			var clientId = _clientEngine.CreateNewClient(request);
+			return _clientEngine.GetClient(clientId);
 		}
 
 		[HttpGet]
 		[Route("top/{limit}")]
-		public List<SocialApi.Client.Create> MostPopularClients(int limit)
+		public List<SocialApi.Client> MostPopularClients(int limit)
 		{
 			return _clientEngine.GetMostPopularClients(limit);
 		}
 
 		[HttpPut]
 		[Route("subscribe/{from}/{to}")]
-		public List<SocialApi.Client.Create> Subscribe(int from, int to)
+		public void Subscribe(int from, int to)
 		{
-			return _clientEngine.Subscribe(from, to);
+			_clientEngine.Subscribe(from, to);
 		}
 	}
 }

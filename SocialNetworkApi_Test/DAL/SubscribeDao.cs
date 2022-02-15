@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace SocialNetworkApi_Test
 {
-	public class Subscribe
+	public class SubscribeDao
 	{
 		public int SubscriberClientId { get; set; }
 		public int TargetClientId { get; set; }
 
-		public Client SubscriberClient { get; set; }
-		public Client TargetClient { get; set; }
+		public ClientDao SubscriberClient { get; set; }
+		public ClientDao TargetClient { get; set; }
 	}
 }
